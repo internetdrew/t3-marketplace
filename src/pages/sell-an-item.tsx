@@ -27,7 +27,7 @@ const SellAnItem = () => {
           <h1>Sell an item</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex w-1/3 flex-col gap-12"
+            className="flex w-1/4 flex-col gap-4"
           >
             <div>
               <label
@@ -41,7 +41,7 @@ const SellAnItem = () => {
                 id="name"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Product name"
-                required
+                {...register("name", { required: true })}
               />
             </div>
             <div>
@@ -56,7 +56,7 @@ const SellAnItem = () => {
                 id="description"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Product description"
-                required
+                {...register("description", { required: true })}
               />
             </div>
             <div className="mx-auto">
@@ -72,14 +72,16 @@ const SellAnItem = () => {
                 id="price"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Product price"
-                required
+                {...register("price", { required: true })}
               />
             </div>
 
-            <input
+            <button
               type="submit"
-              className="cursor-pointer rounded-md bg-gray-600 py-2 font-bold duration-200 hover:bg-gray-500 hover:shadow-xl"
-            />
+              className="mb-2 mr-2 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white shadow-lg shadow-blue-500/50 hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-blue-300 dark:shadow-lg dark:shadow-blue-800/80 dark:focus:ring-blue-800 "
+            >
+              Create
+            </button>
           </form>
         </div>
       </main>
