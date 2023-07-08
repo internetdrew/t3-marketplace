@@ -1,6 +1,9 @@
-import { UserButton, UserProfile, SignInButton } from "@clerk/nextjs";
+import { UserButton, SignInButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export function Navbar() {
+  const user = useUser();
+
   return (
     <nav className="border-gray-200 bg-white dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
@@ -11,7 +14,7 @@ export function Navbar() {
             alt="Flowbite Logo"
           />
           <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-            Flowbite
+            T3 Marketplace
           </span>
         </a>
         <button
@@ -31,9 +34,9 @@ export function Navbar() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
@@ -50,14 +53,25 @@ export function Navbar() {
               </a>
             </li>
             <li>
-              <SignInButton mode="modal">
-                <button className="text-white duration-300 hover:text-blue-500">
-                  Sign in
-                </button>
-              </SignInButton>
+              <Link
+                href="/sell-an-item"
+                className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
+                aria-current="page"
+              >
+                Sell an item
+              </Link>
             </li>
+            {!user.isSignedIn && (
+              <li>
+                <SignInButton mode="modal">
+                  <button className="text-white duration-300 hover:text-blue-500">
+                    Sign in
+                  </button>
+                </SignInButton>
+              </li>
+            )}
             <li>
-              <UserButton />
+              <UserButton afterSignOutUrl="/" />
             </li>
           </ul>
         </div>
