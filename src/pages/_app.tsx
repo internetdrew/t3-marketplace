@@ -7,8 +7,10 @@ import { Navbar } from "~/components/Navbar";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
-      <Navbar />
-      <Component {...pageProps} />
+      <div className="text-white">
+        <Navbar />
+        <Component {...pageProps} />
+      </div>
     </ClerkProvider>
   );
 };
