@@ -1,14 +1,22 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export const listingsRouter = createTRPCRouter({
+  list: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.listing.findMany();
+  }),
   create: protectedProcedure
     .input(
       z.object({ name: z.string(), description: z.string(), price: z.number() })
     )
-    .mutation(({ input, ctx }) => {
-      return ctx.prisma.listing.create({
+    .mutation(async ({ input, ctx }) => {
+      const listing = await ctx.prisma.listing.create({
         data: { ...input, userId: ctx.auth.userId },
       });
+      return listing;
     }),
 });

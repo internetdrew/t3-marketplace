@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { type NextPage } from "next";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 type Inputs = {
   name: string;
@@ -11,18 +12,20 @@ type Inputs = {
 
 const SellAnItem: NextPage = () => {
   const createListing = api.listings.create.useMutation();
+  const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (formData) => {
-    createListing.mutateAsync({
-      ...formData,
-      price: Number(formData.price),
-    });
+  const { register, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit = async (formData: Inputs) => {
+    await createListing
+      .mutateAsync({
+        ...formData,
+        price: Number(formData.price),
+      })
+      .then(() => {
+        return router.push("/");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
