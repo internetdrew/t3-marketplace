@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 export function Card({ listing }: { listing: Listing }) {
   return (
     <Link
-      href={`/listing/${listing.id}`}
+      href={`/listings/${listing.id}`}
       className="block rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -28,8 +28,9 @@ export default function Home() {
         <meta name="description" content="T3 Marketplace to learn new skills" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gray-800">
-        <div className="grid grid-cols-4 gap-12">
+      <main className="flex min-h-screen flex-col bg-gray-800">
+        <h1 className="mx-auto my-16 text-4xl font-semibold">Items for Sale</h1>
+        <div className="mx-auto grid w-3/4 grid-cols-4 gap-12">
           {listings?.data?.map((listing) => (
             <Card key={listing.id} listing={listing} />
           ))}
