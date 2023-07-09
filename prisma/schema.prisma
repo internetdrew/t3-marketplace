@@ -13,10 +13,10 @@ datasource db {
 
 model Listing {
     id          String   @id @default(cuid())
-userId      String      
+    userId      String   
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     name        String
     description String
-    price       String
+    price       Float
 }
