@@ -21,6 +21,7 @@ export function Card({ listing }: { listing: Listing }) {
 
 export default function Home() {
   const listings = api.listings.list.useQuery();
+
   return (
     <>
       <Head>
@@ -30,7 +31,7 @@ export default function Home() {
       </Head>
       <main className="flex min-h-screen flex-col bg-gray-800">
         <h1 className="mx-auto my-16 text-4xl font-semibold">Items for Sale</h1>
-        <div className="mx-auto grid w-3/4 grid-cols-4 gap-12">
+        <div className="mx-auto grid w-3/4 gap-12 sm:grid-cols-2 md:grid-cols-3">
           {listings?.data?.map((listing) => (
             <Card key={listing.id} listing={listing} />
           ))}
